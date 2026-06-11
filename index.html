@@ -3,124 +3,149 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>بوابة المجسمات التفاعلية — المطري كونسلت</title>
+<title>لوحة المجسمات التفاعلية — المطري كونسلت</title>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&family=Amiri:wght@700&display=swap" rel="stylesheet">
 <style>
 :root{
   --navy:#1a5276; --navy-deep:#0e3a57; --red:#c0392b; --gold:#f0c987;
-  --paper:#f7f5f0; --ink:#1e293b; --line:#dcd6c8;
+  --paper:#f7f5f0; --ink:#1e293b; --line:#dcd6c8; --muted:#64748b;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 body{
   font-family:'Tajawal',sans-serif;background:var(--paper);color:var(--ink);min-height:100dvh;
-  background-image:radial-gradient(circle, #d8d2c2 1px, transparent 1px);
-  background-size:26px 26px; /* ورق مساحي منقّط */
+  display:flex;flex-direction:column;
+  background-image:radial-gradient(circle,#d8d2c2 1px,transparent 1px);background-size:26px 26px;
 }
 
 /* ===== الترويسة ===== */
-header{background:var(--navy-deep);color:#fff;padding:18px 18px 16px;border-bottom:4px solid var(--red)}
-header .office{font-family:'Amiri',serif;font-size:1.25rem;font-weight:700;line-height:1.35}
-header .sub{font-size:.7rem;opacity:.72;letter-spacing:.04em;margin-top:3px}
-header .motto{font-size:.74rem;color:var(--gold);margin-top:5px}
-
-.hero{max-width:980px;margin:0 auto;padding:22px 18px 6px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
-.hero h1{font-size:1.25rem;font-weight:900;color:var(--navy)}
-.hero p{font-size:.82rem;color:#64748b;margin-top:4px;max-width:520px}
+header{background:var(--navy-deep);color:#fff;border-bottom:4px solid var(--red)}
+header .inner{max-width:1040px;margin:0 auto;padding:16px 18px 14px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+header .office{font-family:'Amiri',serif;font-size:1.2rem;font-weight:700;line-height:1.35}
+header .sub{font-size:.68rem;opacity:.72;margin-top:2px}
+header .motto{font-size:.72rem;color:var(--gold);margin-top:3px}
 .btn-new{
-  background:var(--red);color:#fff;text-decoration:none;font-weight:700;font-size:.9rem;
-  padding:12px 20px;border-radius:12px;box-shadow:0 4px 14px rgba(192,57,43,.35);white-space:nowrap
+  background:var(--red);color:#fff;text-decoration:none;font-weight:900;font-size:.92rem;
+  padding:13px 22px;border-radius:12px;box-shadow:0 4px 16px rgba(192,57,43,.45);white-space:nowrap
 }
 
-.toolbar{max-width:980px;margin:10px auto 0;padding:0 18px}
-.toolbar input{
-  width:100%;max-width:420px;padding:10px 14px;border:1.5px solid var(--line);border-radius:10px;
-  font-family:'Tajawal';font-size:.9rem;background:#fff;color:var(--ink)
+/* ===== شريط الإحصائيات ===== */
+.stats{max-width:1040px;margin:18px auto 0;padding:0 18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}
+.stat{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;text-align:center}
+.stat b{display:block;font-size:1.5rem;font-weight:900;color:var(--navy);line-height:1.2}
+.stat span{font-size:.7rem;color:var(--muted)}
+.stat.hl b{color:var(--red)}
+
+/* ===== أدوات ===== */
+.tools{max-width:1040px;margin:14px auto 0;padding:0 18px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.tools input{
+  flex:1;min-width:220px;padding:11px 14px;border:1.5px solid var(--line);border-radius:10px;
+  font-family:'Tajawal';font-size:.9rem;background:#fff
 }
-.toolbar input:focus{outline:2px solid var(--navy);border-color:var(--navy)}
+.tools input:focus{outline:2px solid var(--navy);border-color:var(--navy)}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{
+  background:#fff;border:1.5px solid var(--line);border-radius:99px;padding:7px 14px;
+  font-family:'Tajawal';font-size:.76rem;font-weight:700;color:var(--muted);cursor:pointer
+}
+.chip.on{background:var(--navy);border-color:var(--navy);color:#fff}
 
-/* ===== شبكة المشاريع ===== */
-.grid{max-width:980px;margin:16px auto 40px;padding:0 18px;display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}
-
+/* ===== الشبكة ===== */
+.grid{max-width:1040px;width:100%;margin:16px auto 40px;padding:0 18px;display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
 .card{
   background:#fff;border:1.5px solid var(--line);border-radius:14px;overflow:hidden;
   display:flex;flex-direction:column;box-shadow:0 2px 10px rgba(30,41,59,.06)
 }
-.card .top{padding:14px 16px 10px;border-bottom:1px dashed var(--line)}
-.card .badge{display:inline-block;background:var(--navy);color:#fff;font-size:.62rem;font-weight:700;padding:2px 9px;border-radius:99px;margin-bottom:6px;margin-inline-end:5px}
-.card .badge.lock{background:var(--red)}
-.card h3{font-size:.95rem;font-weight:900;color:var(--navy);line-height:1.45}
-.card .client{font-size:.76rem;color:#64748b;margin-top:3px}
-.card .slug{font-size:.66rem;color:#94a3b8;direction:ltr;text-align:right;margin-top:4px;font-family:monospace}
-
-.card .body{display:flex;gap:14px;padding:14px 16px;align-items:center}
-.card .qr{width:96px;height:96px;flex:none;border:1px solid var(--line);border-radius:8px;background:#fff;cursor:pointer}
+.card .top{padding:14px 16px 11px;border-bottom:1px dashed var(--line)}
+.badge{display:inline-block;background:var(--navy);color:#fff;font-size:.62rem;font-weight:700;padding:2.5px 10px;border-radius:99px;margin-bottom:7px;margin-inline-end:5px}
+.badge.lock{background:var(--red)}
+.card h3{font-size:.97rem;font-weight:900;color:var(--navy);line-height:1.5;cursor:pointer}
+.card .meta{font-size:.76rem;color:var(--muted);margin-top:5px;line-height:1.8}
+.card .meta b{color:var(--ink);font-weight:700}
+.card .slug{font-size:.64rem;color:#a8b3c2;direction:ltr;text-align:right;margin-top:5px;font-family:monospace}
+.card .body{display:flex;gap:14px;padding:13px 16px;align-items:center}
+.card .qr{width:92px;height:92px;flex:none;border:1px solid var(--line);border-radius:8px;background:#fff;cursor:pointer}
 .card .qr img{width:100%;height:100%;object-fit:contain}
-.card .hint{font-size:.68rem;color:#94a3b8;line-height:1.7}
-
-.card .actions{display:grid;grid-template-columns:1fr 1fr 1fr;border-top:1px solid var(--line)}
-.card .actions a, .card .actions button{
-  font-family:'Tajawal';font-size:.78rem;font-weight:700;padding:11px 4px;text-align:center;
+.card .hint{font-size:.67rem;color:#94a3b8;line-height:1.75}
+.card .actions{display:grid;grid-template-columns:1fr 1fr 1fr;border-top:1px solid var(--line);margin-top:auto}
+.card .actions a,.card .actions button{
+  font-family:'Tajawal';font-size:.78rem;font-weight:700;padding:12px 4px;text-align:center;
   background:none;border:none;cursor:pointer;text-decoration:none;color:var(--navy)
 }
 .card .actions > *:not(:last-child){border-inline-end:1px solid var(--line)}
 .card .actions .wa{color:#128c4b}
 .card .actions *:active{background:var(--paper)}
 
-.state{max-width:980px;margin:40px auto;padding:0 18px;text-align:center;color:#64748b;font-size:.9rem}
+.state{max-width:1040px;margin:46px auto;padding:0 18px;text-align:center;color:var(--muted);font-size:.92rem}
 
-footer{background:var(--navy-deep);color:#cbd5e1;font-size:.68rem;text-align:center;padding:12px 16px;line-height:1.8;margin-top:auto}
+/* ===== شريط روابط النظام ===== */
+.sysbar{max-width:1040px;width:100%;margin:0 auto 26px;padding:0 18px;display:flex;gap:10px;flex-wrap:wrap}
+.sysbar a{
+  flex:1;min-width:200px;background:#fff;border:1.5px solid var(--line);border-radius:12px;
+  padding:12px 14px;text-decoration:none;color:var(--ink);font-size:.78rem;line-height:1.7
+}
+.sysbar a b{display:block;color:var(--navy);font-size:.84rem}
+
+footer{background:var(--navy-deep);color:#cbd5e1;font-size:.67rem;text-align:center;padding:12px 16px;line-height:1.8;margin-top:auto}
 footer b{color:#fff}
 
-/* نافذة QR المكبّر */
 dialog{border:none;border-radius:16px;padding:0;max-width:92vw}
 dialog::backdrop{background:rgba(14,58,87,.6)}
 dialog .dlg{padding:18px;text-align:center;font-family:'Tajawal'}
 dialog img{width:min(78vw,420px);height:auto}
-dialog p{font-size:.78rem;color:#64748b;margin-top:8px}
-dialog button{margin-top:12px;background:var(--navy);color:#fff;border:none;border-radius:10px;padding:10px 22px;font-family:'Tajawal';font-weight:700;cursor:pointer}
+dialog p{font-size:.78rem;color:var(--muted);margin-top:8px}
+dialog button{margin-top:12px;background:var(--navy);color:#fff;border:none;border-radius:10px;padding:10px 24px;font-family:'Tajawal';font-weight:700;cursor:pointer}
 
-.toast{
-  position:fixed;bottom:24px;inset-inline:0;display:flex;justify-content:center;pointer-events:none;
-  opacity:0;transition:opacity .25s
-}
+.toast{position:fixed;bottom:24px;inset-inline:0;display:flex;justify-content:center;pointer-events:none;opacity:0;transition:opacity .25s;z-index:99}
 .toast.show{opacity:1}
 .toast span{background:var(--navy-deep);color:#fff;font-size:.8rem;padding:9px 18px;border-radius:99px}
 </style>
 </head>
 <body>
 
-<header>
-  <div class="office">عبدالعزيز حسن المطري للاستشارات الهندسية</div>
-  <div class="sub">A. H. AL-MATARI FOR ENGINEERING CONSULT — ترخيص ٥١٠٠٠٠٠٧٨٢</div>
-  <div class="motto">المستشار مؤتمن</div>
-</header>
-
-<div class="hero">
+<header><div class="inner">
   <div>
-    <h1>بوابة المجسمات التفاعلية AR</h1>
-    <p>كل مشروع منشور يظهر هنا تلقائياً برابطه ورمزه. اطبع الـQR على الكروكي، أو أرسل الرابط للعميل والمهندسين لمعاينة المشروع على أرض الواقع.</p>
+    <div class="office">عبدالعزيز حسن المطري للاستشارات الهندسية</div>
+    <div class="sub">A. H. AL-MATARI FOR ENGINEERING CONSULT — ترخيص ٥١٠٠٠٠٠٧٨٢</div>
+    <div class="motto">المستشار مؤتمن — لوحة المجسمات التفاعلية AR</div>
   </div>
-  <a class="btn-new" href="https://n8n.bmeng.tech/form/ar-croquis">＋ نشر مشروع جديد</a>
+  <a class="btn-new" href="https://n8n.bmeng.tech/form/ar-croquis-form">＋ رفع طلب نشر</a>
+</div></header>
+
+<div class="stats" id="stats" hidden>
+  <div class="stat hl"><b id="stTotal">—</b><span>إجمالي المشاريع</span></div>
+  <div class="stat"><b id="stMonth">—</b><span>هذا الشهر</span></div>
+  <div class="stat"><b id="stLand">—</b><span>أراضي</span></div>
+  <div class="stat"><b id="stBld">—</b><span>مبانٍ وتسليم</span></div>
+  <div class="stat"><b id="stLock">—</b><span>محمية بالهوية</span></div>
 </div>
 
-<div class="toolbar">
-  <input id="search" type="search" placeholder="🔍 ابحث باسم المشروع أو العميل أو الرمز…">
+<div class="tools">
+  <input id="search" type="search" placeholder="🔍 بحث: اسم المشروع، العميل، الحي، الرمز…">
+  <div class="chips" id="chips">
+    <button class="chip on" data-f="">الكل</button>
+    <button class="chip" data-f="تسليم">تسليم</button>
+    <button class="chip" data-f="أرض">أراضي</button>
+    <button class="chip" data-f="مبنى">مبانٍ</button>
+  </div>
 </div>
 
 <div id="state" class="state">جارٍ تحميل المشاريع…</div>
 <div id="grid" class="grid"></div>
 
+<div class="sysbar">
+  <a href="client/"><b>🏗️ بوابة العميل</b>الرابط الموحد — العميل يدخل بهويته ويرى مشاريعه. اطبع QR هذا الرابط على السندات ولوحة المكتب</a>
+  <a href="https://n8n.bmeng.tech/form/ar-croquis-form"><b>📤 رفع طلب نشر</b>للمهندسين — نموذج النشر يوم الاستلام: بيانات العميل والمشروع وملف المجسم</a>
+</div>
+
 <footer>
   <b>م. محمد حمد المنصور</b> — جازان، العارضة، طريق الأمير سلطان، مجمع العبدلي التجاري — هاتف ‎+966538986031‎
 </footer>
 
-<dialog id="qrDlg">
-  <div class="dlg">
-    <img id="qrBig" alt="رمز QR">
-    <p>اضغط مطولاً على الصورة → حفظ الصورة، ثم أدرجها في الكروكي قبل الطباعة</p>
-    <button onclick="qrDlg.close()">إغلاق</button>
-  </div>
-</dialog>
+<dialog id="qrDlg"><div class="dlg">
+  <img id="qrBig" alt="رمز QR">
+  <p>اضغط مطولاً → حفظ الصورة، ثم أدرجها في الكروكي أو المستند قبل الطباعة</p>
+  <button onclick="qrDlg.close()">إغلاق</button>
+</div></dialog>
 
 <div id="toast" class="toast"><span id="toastTxt"></span></div>
 
@@ -129,7 +154,7 @@ const OWNER='engmhi126-ui', REPO='ar-croquis';
 const BASE=`https://${OWNER}.github.io/${REPO}/`;
 const grid=document.getElementById('grid'), state=document.getElementById('state');
 const qrDlg=document.getElementById('qrDlg'), qrBig=document.getElementById('qrBig');
-let projects=[];
+let filter='';
 
 const qrUrl=(u,s)=>`https://api.qrserver.com/v1/create-qr-code/?size=${s}x${s}&color=1a5276&data=${encodeURIComponent(u)}`;
 
@@ -138,39 +163,38 @@ function toast(msg){
   document.getElementById('toastTxt').textContent=msg;
   t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),1800);
 }
-
 async function copyLink(url){
   try{ await navigator.clipboard.writeText(url); toast('تم نسخ الرابط ✓'); }
   catch(e){ prompt('انسخ الرابط:', url); }
 }
-
 function waShare(title,url,locked){
-  const lockLine = locked ? '\n\nالصفحة خاصة بكم — تُفتح بإدخال رقم هويتكم.' : '';
+  const lockLine = locked ? '\n\nالصفحة خاصة بكم — تُفتح بإدخال رقم الهوية/الإقامة مرة واحدة.' : '';
   const msg=`مكتب المطري للاستشارات الهندسية\n\nالمجسم التفاعلي للمشروع: ${title}${lockLine}\n\nافتح الرابط واضغط زر «اعرضه على أرض الواقع» لمعاينته بتقنية الواقع المعزز:\n${url}`;
   window.open('https://wa.me/?text='+encodeURIComponent(msg),'_blank');
 }
-
 function showQr(url){ qrBig.src=qrUrl(url,1200); qrDlg.showModal(); }
 
 function card(p){
-  const el=document.createElement('div'); el.className='card'; el.dataset.q=(p.title+' '+p.client+' '+p.district+' '+p.slug).toLowerCase();
+  const el=document.createElement('div'); el.className='card';
+  el.dataset.q=(p.title+' '+p.client+' '+p.district+' '+p.slug).toLowerCase();
+  el.dataset.t=p.type||'';
   el.innerHTML=`
     <div class="top">
-      ${p.type?`<span class="badge">${p.type}</span>`:''}${p.locked?`<span class="badge lock">🔐 محمي بالهوية</span>`:''}
-      <h3>${p.title}</h3>
-      ${p.client?`<div class="client">${p.client}</div>`:''}
-      ${p.district?`<div class="client">${p.district}</div>`:''}
+      ${p.type?`<span class="badge">${p.type}</span>`:''}${p.locked?`<span class="badge lock">🔐 محمي</span>`:''}
+      <h3 title="فتح المشروع">${p.title}</h3>
+      <div class="meta">${p.client?`<b>${p.client}</b><br>`:''}${p.district||''}</div>
       <div class="slug">/${p.slug}/</div>
     </div>
     <div class="body">
       <div class="qr" title="تكبير QR"><img loading="lazy" src="${qrUrl(p.url,200)}" alt="QR ${p.slug}"></div>
-      <div class="hint">اضغط الرمز لتكبيره وحفظه بدقة الطباعة، أو استخدم الأزرار بالأسفل للمشاركة</div>
+      <div class="hint">اضغط الرمز لحفظه بدقة الطباعة على الكروكي، أو شارك بالأزرار أدناه</div>
     </div>
     <div class="actions">
       <a href="${p.url}" target="_blank">فتح ↗</a>
       <button type="button" data-act="copy">نسخ الرابط</button>
       <button type="button" class="wa" data-act="wa">واتساب</button>
     </div>`;
+  el.querySelector('h3').onclick=()=>window.open(p.url,'_blank');
   el.querySelector('.qr').onclick=()=>showQr(p.url);
   el.querySelector('[data-act=copy]').onclick=()=>copyLink(p.url);
   el.querySelector('[data-act=wa]').onclick=()=>waShare(p.title,p.url,p.locked);
@@ -178,21 +202,28 @@ function card(p){
 }
 
 async function meta(slug){
-  // قراءة بيانات المشروع من صفحته (يدعم إصدارات الصفحات القديمة والجديدة)
-  const p={slug, url:BASE+slug+'/', title:slug, client:'', district:'', type:'', locked:false};
+  const p={slug, url:BASE+slug+'/', title:slug, client:'', district:'', type:'', locked:false, ym:''};
+  const m=slug.match(/^prj-(\d{4})(\d{2})\d{2}-/); if(m) p.ym=m[1]+'-'+m[2];
   try{
     const html=await (await fetch(p.url+'index.html',{cache:'no-store'})).text();
     const t=html.match(/<h1>(.*?)<\/h1>/); if(t) p.title=t[1];
     const b=html.match(/class="type">(.*?)<\/span>/); if(b) p.type=b[1];
     p.locked=html.includes('id="gate"');
-    // صفحات v6: <small>العميل:</small> الاسم
     let c=html.match(/<small>العميل:<\/small>\s*(.*?)<\/div>/);
-    // صفحات أقدم: class="client">العميل: الاسم
     if(!c) c=html.match(/class="client">العميل:\s*(.*?)<\/div>/);
-    if(c) p.client='العميل: '+c[1];
-    const d=html.match(/<small>الحي:<\/small>\s*(.*?)<\/div>/); if(d) p.district='الحي: '+d[1];
+    if(c) p.client=c[1];
+    const d=html.match(/<small>الحي:<\/small>\s*(.*?)<\/div>/); if(d) p.district='📍 '+d[1];
   }catch(e){}
   return p;
+}
+
+function applyFilter(){
+  const q=document.getElementById('search').value.trim().toLowerCase();
+  grid.querySelectorAll('.card').forEach(c=>{
+    const okQ=c.dataset.q.includes(q);
+    const okF=!filter || (c.dataset.t||'').includes(filter);
+    c.style.display=(okQ&&okF)?'':'none';
+  });
 }
 
 async function load(){
@@ -200,19 +231,29 @@ async function load(){
     const res=await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/`,{cache:'no-store'});
     if(!res.ok) throw new Error('HTTP '+res.status);
     const items=await res.json();
-    const dirs=items.filter(i=>i.type==='dir').map(i=>i.name).sort().reverse();
-    if(!dirs.length){ state.textContent='لا توجد مشاريع منشورة بعد — ابدأ بزر «نشر مشروع جديد»'; return; }
-    projects=await Promise.all(dirs.map(meta));
+    const dirs=items.filter(i=>i.type==='dir'&&i.name!=='client').map(i=>i.name).sort().reverse();
+    if(!dirs.length){ state.textContent='لا توجد مشاريع منشورة بعد — ابدأ بزر «رفع طلب نشر»'; return; }
+    const projects=await Promise.all(dirs.map(meta));
     state.style.display='none';
     projects.forEach(p=>grid.appendChild(card(p)));
+    // الإحصائيات
+    const now=new Date(), ym=now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0');
+    document.getElementById('stTotal').textContent=projects.length;
+    document.getElementById('stMonth').textContent=projects.filter(p=>p.ym===ym).length;
+    document.getElementById('stLand').textContent=projects.filter(p=>(p.type||'').includes('أرض')).length;
+    document.getElementById('stBld').textContent=projects.filter(p=>(p.type||'').includes('مبنى')||(p.type||'').includes('تسليم')).length;
+    document.getElementById('stLock').textContent=projects.filter(p=>p.locked).length;
+    document.getElementById('stats').hidden=false;
   }catch(e){
     state.textContent='تعذر تحميل قائمة المشاريع — أعد تحميل الصفحة بعد قليل';
   }
 }
 
-document.getElementById('search').addEventListener('input',e=>{
-  const q=e.target.value.trim().toLowerCase();
-  grid.querySelectorAll('.card').forEach(c=>c.style.display=c.dataset.q.includes(q)?'':'none');
+document.getElementById('search').addEventListener('input',applyFilter);
+document.getElementById('chips').addEventListener('click',e=>{
+  const b=e.target.closest('.chip'); if(!b) return;
+  document.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));
+  b.classList.add('on'); filter=b.dataset.f; applyFilter();
 });
 
 load();
