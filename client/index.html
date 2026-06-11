@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>بوابة العميل — المطري كونسلت</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&family=Amiri:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#1a5276;--navy-deep:#0e3a57;--red:#c0392b;--gold:#f0c987;--paper:#f7f5f0;--ink:#1e293b;--line:#dcd6c8}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Tajawal',sans-serif;background:var(--paper);color:var(--ink);min-height:100dvh;display:flex;flex-direction:column;background-image:radial-gradient(circle,#d8d2c2 1px,transparent 1px);background-size:26px 26px}
+header{background:var(--navy-deep);color:#fff;padding:16px 18px 14px;border-bottom:4px solid var(--red);text-align:center}
+header .office{font-family:'Amiri',serif;font-size:1.2rem;font-weight:700}
+header .motto{font-size:.74rem;color:var(--gold);margin-top:4px}
+main{flex:1;display:flex;align-items:center;justify-content:center;padding:24px 18px}
+.card{background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:28px 22px;max-width:400px;width:100%;text-align:center;box-shadow:0 8px 30px rgba(30,41,59,.1)}
+.card .ico{font-size:2.2rem}
+.card h1{font-size:1.05rem;font-weight:900;color:var(--navy);margin-top:10px}
+.card p{font-size:.8rem;color:#64748b;margin-top:8px;line-height:1.9}
+input{width:100%;margin-top:16px;padding:13px;border:1.5px solid var(--line);border-radius:10px;font-family:'Tajawal';font-size:1.05rem;text-align:center;letter-spacing:.18em;direction:ltr}
+input:focus{outline:2px solid var(--navy)}
+button{width:100%;margin-top:12px;background:var(--navy);color:#fff;border:none;border-radius:10px;padding:13px;font-family:'Tajawal';font-weight:700;font-size:.95rem;cursor:pointer}
+.err{color:var(--red);font-size:.78rem;margin-top:10px;min-height:1.3em}
+.list{margin-top:14px;text-align:right;display:none}
+.list a{display:block;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:11px 13px;margin-top:8px;text-decoration:none;color:var(--navy);font-weight:700;font-size:.86rem}
+.list a small{display:block;color:#94a3b8;font-weight:400;font-size:.7rem;margin-top:2px}
+footer{background:var(--navy-deep);color:#cbd5e1;font-size:.66rem;text-align:center;padding:10px;line-height:1.7}
+footer b{color:#fff}
+</style>
+</head>
+<body>
+<header><div class="office">عبدالعزيز حسن المطري للاستشارات الهندسية</div><div class="motto">المستشار مؤتمن</div></header>
+<main><div class="card">
+  <div class="ico">🏗️</div>
+  <h1>بوابة العميل</h1>
+  <p>أدخل رقم الهوية أو الإقامة (10 أرقام) مرة واحدة لعرض مشاريعك<br>ومجسماتها التفاعلية بتقنية الواقع المعزز</p>
+  <input id="nid" inputmode="numeric" autocomplete="off" placeholder="رقم الهوية / الإقامة" maxlength="10">
+  <button id="go">عرض مشاريعي</button>
+  <div class="err" id="err"></div>
+  <div class="list" id="list"></div>
+</div></main>
+<footer><b>م. محمد حمد المنصور</b> — جازان، العارضة — هاتف ‎+966538986031‎</footer>
+<script>
+const inp=document.getElementById('nid'),err=document.getElementById('err'),list=document.getElementById('list'),btn=document.getElementById('go');
+const toLatin=s=>s.replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d));
+async function sha(t){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(t));return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join('')}
+async function check(){
+  err.textContent='';list.style.display='none';list.innerHTML='';
+  const v=toLatin(inp.value).replace(/\D/g,'');
+  if(v.length!==10){err.textContent='أدخل 10 أرقام (هوية أو إقامة)';return}
+  btn.textContent='جارٍ البحث…';btn.disabled=true;
+  try{
+    const h=await sha(v);
+    const idx=await (await fetch('../client-index.json?t='+Date.now(),{cache:'no-store'})).json();
+    const projects=idx[h];
+    if(!projects||!projects.length){err.textContent='لا توجد مشاريع مسجلة بهذا الرقم — إن سُلِّم مشروعك للتو فأعد المحاولة بعد دقائق';return}
+    projects.forEach(p=>localStorage.setItem('ar-ok-'+p.slug,'1'));
+    if(projects.length===1){location.href='../'+projects[0].slug+'/';return}
+    projects.slice().reverse().forEach(p=>{
+      const a=document.createElement('a');a.href='../'+p.slug+'/';
+      a.innerHTML='<span>'+p.title+'</span><small>'+(p.d||'')+'</small>';
+      list.appendChild(a);
+    });
+    list.style.display='block';
+  }catch(e){err.textContent='تعذر الاتصال — أعد المحاولة'}
+  finally{btn.textContent='عرض مشاريعي';btn.disabled=false}
+}
+btn.onclick=check;inp.addEventListener('keydown',e=>{if(e.key==='Enter')check()});
+</script>
+</body>
+</html>
