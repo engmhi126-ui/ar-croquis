@@ -3,60 +3,87 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>الكروكي التفاعلي — المطري كونسلت</title>
-<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
+<title>بوابة المجسمات التفاعلية — المطري كونسلت</title>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&family=Amiri:wght@700&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --navy:#1a5276; --navy-deep:#0e3a57; --red:#c0392b;
-    --green:#287450; --gold:#ca8a04; --paper:#f7f5f0; --ink:#1e293b;
-  }
-  *{margin:0;padding:0;box-sizing:border-box}
-  body{font-family:'Tajawal',sans-serif;background:var(--paper);color:var(--ink);min-height:100dvh;display:flex;flex-direction:column}
+:root{
+  --navy:#1a5276; --navy-deep:#0e3a57; --red:#c0392b; --gold:#f0c987;
+  --paper:#f7f5f0; --ink:#1e293b; --line:#dcd6c8;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Tajawal',sans-serif;background:var(--paper);color:var(--ink);min-height:100dvh;
+  background-image:radial-gradient(circle, #d8d2c2 1px, transparent 1px);
+  background-size:26px 26px; /* ورق مساحي منقّط */
+}
 
-  header{background:var(--navy-deep);color:#fff;padding:14px 18px 12px;border-bottom:4px solid var(--red)}
-  header .office{font-family:'Amiri',serif;font-size:1.15rem;font-weight:700;line-height:1.3}
-  header .sub{font-size:.7rem;opacity:.75;letter-spacing:.05em;margin-top:2px}
-  header .motto{font-size:.72rem;color:#f0c987;margin-top:4px}
+/* ===== الترويسة ===== */
+header{background:var(--navy-deep);color:#fff;padding:18px 18px 16px;border-bottom:4px solid var(--red)}
+header .office{font-family:'Amiri',serif;font-size:1.25rem;font-weight:700;line-height:1.35}
+header .sub{font-size:.7rem;opacity:.72;letter-spacing:.04em;margin-top:3px}
+header .motto{font-size:.74rem;color:var(--gold);margin-top:5px}
 
-  .doc{padding:14px 18px 6px}
-  .doc h1{font-size:1.05rem;font-weight:900;color:var(--navy)}
-  .doc .meta{font-size:.78rem;color:#64748b;margin-top:3px}
+.hero{max-width:980px;margin:0 auto;padding:22px 18px 6px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
+.hero h1{font-size:1.25rem;font-weight:900;color:var(--navy)}
+.hero p{font-size:.82rem;color:#64748b;margin-top:4px;max-width:520px}
+.btn-new{
+  background:var(--red);color:#fff;text-decoration:none;font-weight:700;font-size:.9rem;
+  padding:12px 20px;border-radius:12px;box-shadow:0 4px 14px rgba(192,57,43,.35);white-space:nowrap
+}
 
-  model-viewer{
-    width:100%;flex:1;min-height:46dvh;
-    background:radial-gradient(ellipse at center,#e8eef3 0%,#d4dde6 100%);
-    --poster-color:transparent;
-  }
-  .ar-hint{
-    position:absolute;inset-inline:0;bottom:10px;display:flex;justify-content:center;pointer-events:none
-  }
-  .ar-hint span{
-    background:rgba(14,58,87,.88);color:#fff;font-size:.75rem;
-    padding:6px 14px;border-radius:99px;backdrop-filter:blur(4px)
-  }
-  .viewer-wrap{position:relative;display:flex;flex-direction:column;flex:1}
+.toolbar{max-width:980px;margin:10px auto 0;padding:0 18px}
+.toolbar input{
+  width:100%;max-width:420px;padding:10px 14px;border:1.5px solid var(--line);border-radius:10px;
+  font-family:'Tajawal';font-size:.9rem;background:#fff;color:var(--ink)
+}
+.toolbar input:focus{outline:2px solid var(--navy);border-color:var(--navy)}
 
-  /* شريط الأنصبة — كروكي مصغر بنِسَب القطع الحقيقية */
-  .share-bar{display:flex;height:14px;margin:14px 18px 8px;border-radius:7px;overflow:hidden;direction:ltr}
-  .share-bar i{display:block;height:100%}
-  .legend{padding:0 18px 16px;display:grid;grid-template-columns:1fr 1fr;gap:8px 14px}
-  .legend .item{display:flex;align-items:center;gap:8px;font-size:.82rem}
-  .legend .sw{width:13px;height:13px;border-radius:3px;flex:none}
-  .legend b{font-weight:700}
-  .legend small{color:#64748b}
+/* ===== شبكة المشاريع ===== */
+.grid{max-width:980px;margin:16px auto 40px;padding:0 18px;display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}
 
-  footer{background:var(--navy-deep);color:#cbd5e1;font-size:.68rem;text-align:center;padding:10px 16px;line-height:1.7}
-  footer b{color:#fff}
+.card{
+  background:#fff;border:1.5px solid var(--line);border-radius:14px;overflow:hidden;
+  display:flex;flex-direction:column;box-shadow:0 2px 10px rgba(30,41,59,.06)
+}
+.card .top{padding:14px 16px 10px;border-bottom:1px dashed var(--line)}
+.card .badge{display:inline-block;background:var(--navy);color:#fff;font-size:.62rem;font-weight:700;padding:2px 9px;border-radius:99px;margin-bottom:6px}
+.card h3{font-size:.95rem;font-weight:900;color:var(--navy);line-height:1.45}
+.card .client{font-size:.76rem;color:#64748b;margin-top:3px}
+.card .slug{font-size:.66rem;color:#94a3b8;direction:ltr;text-align:right;margin-top:4px;font-family:monospace}
 
-  button[slot="ar-button"]{
-    position:absolute;top:12px;left:12px;
-    background:var(--red);color:#fff;border:0;border-radius:10px;
-    font-family:'Tajawal';font-weight:700;font-size:.85rem;
-    padding:10px 16px;box-shadow:0 4px 14px rgba(192,57,43,.4);cursor:pointer
-  }
-  @media (prefers-reduced-motion: reduce){ model-viewer{--auto-rotate:none} }
+.card .body{display:flex;gap:14px;padding:14px 16px;align-items:center}
+.card .qr{width:96px;height:96px;flex:none;border:1px solid var(--line);border-radius:8px;background:#fff;cursor:pointer}
+.card .qr img{width:100%;height:100%;object-fit:contain}
+.card .hint{font-size:.68rem;color:#94a3b8;line-height:1.7}
+
+.card .actions{display:grid;grid-template-columns:1fr 1fr 1fr;border-top:1px solid var(--line)}
+.card .actions a, .card .actions button{
+  font-family:'Tajawal';font-size:.78rem;font-weight:700;padding:11px 4px;text-align:center;
+  background:none;border:none;cursor:pointer;text-decoration:none;color:var(--navy)
+}
+.card .actions > *:not(:last-child){border-inline-end:1px solid var(--line)}
+.card .actions .wa{color:#128c4b}
+.card .actions *:active{background:var(--paper)}
+
+.state{max-width:980px;margin:40px auto;padding:0 18px;text-align:center;color:#64748b;font-size:.9rem}
+
+footer{background:var(--navy-deep);color:#cbd5e1;font-size:.68rem;text-align:center;padding:12px 16px;line-height:1.8;margin-top:auto}
+footer b{color:#fff}
+
+/* نافذة QR المكبّر */
+dialog{border:none;border-radius:16px;padding:0;max-width:92vw}
+dialog::backdrop{background:rgba(14,58,87,.6)}
+dialog .dlg{padding:18px;text-align:center;font-family:'Tajawal'}
+dialog img{width:min(78vw,420px);height:auto}
+dialog p{font-size:.78rem;color:#64748b;margin-top:8px}
+dialog button{margin-top:12px;background:var(--navy);color:#fff;border:none;border-radius:10px;padding:10px 22px;font-family:'Tajawal';font-weight:700;cursor:pointer}
+
+.toast{
+  position:fixed;bottom:24px;inset-inline:0;display:flex;justify-content:center;pointer-events:none;
+  opacity:0;transition:opacity .25s
+}
+.toast.show{opacity:1}
+.toast span{background:var(--navy-deep);color:#fff;font-size:.8rem;padding:9px 18px;border-radius:99px}
 </style>
 </head>
 <body>
@@ -67,44 +94,119 @@
   <div class="motto">المستشار مؤتمن</div>
 </header>
 
-<div class="doc">
-  <h1>الكروكي التفاعلي — تقسيم إرث (نموذج تجريبي)</h1>
-  <div class="meta">أرض ١٠٠ × ٣٠ م — المساحة ٣٬٠٠٠ م² — جازان / العارضة</div>
+<div class="hero">
+  <div>
+    <h1>بوابة المجسمات التفاعلية AR</h1>
+    <p>كل مشروع منشور يظهر هنا تلقائياً برابطه ورمزه. اطبع الـQR على الكروكي، أو أرسل الرابط للعميل والمهندسين لمعاينة المشروع على أرض الواقع.</p>
+  </div>
+  <a class="btn-new" href="https://n8n.bmeng.tech/form/ar-croquis">＋ نشر مشروع جديد</a>
 </div>
 
-<div class="viewer-wrap">
-  <model-viewer
-    src="parcel.glb"
-    alt="مجسم ثلاثي الأبعاد لقطعة أرض مقسمة بين أربعة ورثة"
-    ar ar-modes="scene-viewer webxr quick-look"
-    ar-scale="auto"
-    camera-controls auto-rotate rotation-per-second="8deg"
-    camera-orbit="35deg 65deg 2m" shadow-intensity="1" exposure="1.1"
-    ios-src="parcel.usdz">
-    <button slot="ar-button">📐 اعرضها على أرض الواقع</button>
-  </model-viewer>
-  <div class="ar-hint"><span>حرّك بإصبعك للتدوير — اضغط الزر الأحمر لوضع AR</span></div>
+<div class="toolbar">
+  <input id="search" type="search" placeholder="🔍 ابحث باسم المشروع أو العميل أو الرمز…">
 </div>
 
-<!-- شريط بنفس نسب التقسيم الفعلية -->
-<div class="share-bar" aria-hidden="true">
-  <i style="width:12.5%;background:var(--navy)"></i>
-  <i style="width:35%;background:var(--red)"></i>
-  <i style="width:35%;background:var(--green)"></i>
-  <i style="width:17.5%;background:var(--gold)"></i>
-</div>
-
-<div class="legend">
-  <div class="item"><span class="sw" style="background:var(--navy)"></span><span><b>الزوجة</b> ⅛ <small>— ٣٧٥ م²</small></span></div>
-  <div class="item"><span class="sw" style="background:var(--red)"></span><span><b>الابن الأول</b> <small>— ١٬٠٥٠ م²</small></span></div>
-  <div class="item"><span class="sw" style="background:var(--green)"></span><span><b>الابن الثاني</b> <small>— ١٬٠٥٠ م²</small></span></div>
-  <div class="item"><span class="sw" style="background:var(--gold)"></span><span><b>البنت</b> <small>— ٥٢٥ م²</small></span></div>
-</div>
+<div id="state" class="state">جارٍ تحميل المشاريع…</div>
+<div id="grid" class="grid"></div>
 
 <footer>
-  <b>م. محمد حمد المنصور</b> — جازان، العارضة، طريق الأمير سلطان، مجمع العبدلي التجاري<br>
-  هاتف ‎+966538986031‎ — هذا النموذج لأغراض العرض، الكروكي المعتمد هو الوثيقة الرسمية
+  <b>م. محمد حمد المنصور</b> — جازان، العارضة، طريق الأمير سلطان، مجمع العبدلي التجاري — هاتف ‎+966538986031‎
 </footer>
 
+<dialog id="qrDlg">
+  <div class="dlg">
+    <img id="qrBig" alt="رمز QR">
+    <p>اضغط مطولاً على الصورة → حفظ الصورة، ثم أدرجها في الكروكي قبل الطباعة</p>
+    <button onclick="qrDlg.close()">إغلاق</button>
+  </div>
+</dialog>
+
+<div id="toast" class="toast"><span id="toastTxt"></span></div>
+
+<script>
+const OWNER='engmhi126-ui', REPO='ar-croquis';
+const BASE=`https://${OWNER}.github.io/${REPO}/`;
+const grid=document.getElementById('grid'), state=document.getElementById('state');
+const qrDlg=document.getElementById('qrDlg'), qrBig=document.getElementById('qrBig');
+let projects=[];
+
+const qrUrl=(u,s)=>`https://api.qrserver.com/v1/create-qr-code/?size=${s}x${s}&color=1a5276&data=${encodeURIComponent(u)}`;
+
+function toast(msg){
+  const t=document.getElementById('toast');
+  document.getElementById('toastTxt').textContent=msg;
+  t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),1800);
+}
+
+async function copyLink(url){
+  try{ await navigator.clipboard.writeText(url); toast('تم نسخ الرابط ✓'); }
+  catch(e){ prompt('انسخ الرابط:', url); }
+}
+
+function waShare(title,url){
+  const msg=`مكتب المطري للاستشارات الهندسية\n\nالمجسم التفاعلي للمشروع: ${title}\n\nافتح الرابط واضغط زر «اعرضه على أرض الواقع» لمعاينته بتقنية الواقع المعزز:\n${url}`;
+  window.open('https://wa.me/?text='+encodeURIComponent(msg),'_blank');
+}
+
+function showQr(url){ qrBig.src=qrUrl(url,1200); qrDlg.showModal(); }
+
+function card(p){
+  const el=document.createElement('div'); el.className='card'; el.dataset.q=(p.title+' '+p.client+' '+p.slug).toLowerCase();
+  el.innerHTML=`
+    <div class="top">
+      ${p.type?`<span class="badge">${p.type}</span>`:''}
+      <h3>${p.title}</h3>
+      ${p.client?`<div class="client">${p.client}</div>`:''}
+      <div class="slug">/${p.slug}/</div>
+    </div>
+    <div class="body">
+      <div class="qr" title="تكبير QR"><img loading="lazy" src="${qrUrl(p.url,200)}" alt="QR ${p.slug}"></div>
+      <div class="hint">اضغط الرمز لتكبيره وحفظه بدقة الطباعة، أو استخدم الأزرار بالأسفل للمشاركة</div>
+    </div>
+    <div class="actions">
+      <a href="${p.url}" target="_blank">فتح ↗</a>
+      <button type="button" data-act="copy">نسخ الرابط</button>
+      <button type="button" class="wa" data-act="wa">واتساب</button>
+    </div>`;
+  el.querySelector('.qr').onclick=()=>showQr(p.url);
+  el.querySelector('[data-act=copy]').onclick=()=>copyLink(p.url);
+  el.querySelector('[data-act=wa]').onclick=()=>waShare(p.title,p.url);
+  return el;
+}
+
+async function meta(slug){
+  // قراءة العنوان والعميل والنوع من صفحة المشروع نفسها (بدون حدود استهلاك)
+  const p={slug, url:BASE+slug+'/', title:slug, client:'', type:''};
+  try{
+    const html=await (await fetch(p.url+'index.html',{cache:'no-store'})).text();
+    const t=html.match(/<h1>(.*?)<\/h1>/); if(t) p.title=t[1];
+    const c=html.match(/class="client">العميل:\s*(.*?)<\/div>/); if(c) p.client='العميل: '+c[1];
+    const b=html.match(/class="type">(.*?)<\/span>/); if(b) p.type=b[1];
+  }catch(e){}
+  return p;
+}
+
+async function load(){
+  try{
+    const res=await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/`,{cache:'no-store'});
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const items=await res.json();
+    const dirs=items.filter(i=>i.type==='dir').map(i=>i.name).sort().reverse();
+    if(!dirs.length){ state.textContent='لا توجد مشاريع منشورة بعد — ابدأ بزر «نشر مشروع جديد»'; return; }
+    projects=await Promise.all(dirs.map(meta));
+    state.style.display='none';
+    projects.forEach(p=>grid.appendChild(card(p)));
+  }catch(e){
+    state.textContent='تعذر تحميل قائمة المشاريع — أعد تحميل الصفحة بعد قليل';
+  }
+}
+
+document.getElementById('search').addEventListener('input',e=>{
+  const q=e.target.value.trim().toLowerCase();
+  grid.querySelectorAll('.card').forEach(c=>c.style.display=c.dataset.q.includes(q)?'':'none');
+});
+
+load();
+</script>
 </body>
 </html>
