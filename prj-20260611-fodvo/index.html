@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>عمارلاة دورين — المطري كونسلت</title>
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&family=Amiri:wght@700&display=swap" rel="stylesheet">
+<style>:root{--navy:#1a5276;--navy-deep:#0e3a57;--red:#c0392b;--gold:#f0c987;--paper:#f7f5f0;--ink:#1e293b}*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Tajawal',sans-serif;background:var(--paper);color:var(--ink);min-height:100dvh;display:flex;flex-direction:column}header{background:var(--navy-deep);color:#fff;padding:14px 18px 12px;border-bottom:4px solid var(--red)}header .office{font-family:'Amiri',serif;font-size:1.15rem;font-weight:700}header .sub{font-size:.7rem;opacity:.75;margin-top:2px}header .motto{font-size:.72rem;color:var(--gold);margin-top:4px}.doc{padding:14px 18px 6px}.doc .type{display:inline-block;background:var(--navy);color:#fff;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:99px;margin-bottom:6px}.doc h1{font-size:1.05rem;font-weight:900;color:var(--navy)}.doc .row{font-size:.8rem;color:var(--ink);margin-top:4px}.doc .row small{color:#64748b}.viewer-wrap{position:relative;display:flex;flex-direction:column;flex:1}model-viewer{width:100%;flex:1;min-height:46dvh;background:radial-gradient(ellipse at center,#e8eef3,#d4dde6)}.share-bar{display:flex;height:14px;margin:14px 18px 8px;border-radius:7px;overflow:hidden;direction:ltr}.share-bar i{display:block;height:100%}.legend{padding:8px 18px 16px;display:grid;grid-template-columns:1fr 1fr;gap:8px 14px}.legend .item{display:flex;align-items:center;gap:8px;font-size:.82rem}.legend .sw{width:13px;height:13px;border-radius:3px;flex:none}footer{background:var(--navy-deep);color:#cbd5e1;font-size:.68rem;text-align:center;padding:10px 16px;line-height:1.7}footer b{color:#fff}button[slot="ar-button"]{position:absolute;top:12px;left:12px;background:var(--red);color:#fff;border:0;border-radius:10px;font-family:'Tajawal';font-weight:700;font-size:.85rem;padding:10px 16px;cursor:pointer}
+#gate{position:fixed;inset:0;background:var(--paper);z-index:50;display:flex;align-items:center;justify-content:center;padding:24px}#gate .card{background:#fff;border:1.5px solid #dcd6c8;border-radius:16px;padding:26px 22px;max-width:380px;width:100%;text-align:center;box-shadow:0 8px 30px rgba(30,41,59,.12)}#gate .lock{font-size:2rem}#gate h2{font-size:1rem;font-weight:900;color:var(--navy);margin-top:8px}#gate p{font-size:.78rem;color:#64748b;margin-top:6px;line-height:1.8}#gate input{width:100%;margin-top:14px;padding:12px;border:1.5px solid #dcd6c8;border-radius:10px;font-family:'Tajawal';font-size:1rem;text-align:center;letter-spacing:.15em;direction:ltr}#gate input:focus{outline:2px solid var(--navy)}#gate button{width:100%;margin-top:12px;background:var(--navy);color:#fff;border:none;border-radius:10px;padding:12px;font-family:'Tajawal';font-weight:700;font-size:.95rem;cursor:pointer}#gate .err{color:var(--red);font-size:.76rem;margin-top:8px;min-height:1.2em}#gate .office-mini{font-family:'Amiri',serif;color:var(--navy-deep);font-size:.85rem;margin-bottom:4px}</style>
+</head>
+<body>
+<div id="gate"><div class="card"><div class="office-mini">المطري للاستشارات الهندسية</div><div class="lock">🔐</div><h2>صفحة تسليم خاصة</h2><p>هذه الصفحة مخصصة لعميل المشروع.<br>أدخل رقم الهوية لعرض المجسم التفاعلي.</p><input id="nid" inputmode="numeric" autocomplete="off" placeholder="رقم الهوية" maxlength="14"><button id="go">عرض المشروع</button><div class="err" id="err"></div></div></div>
+<header><div class="office">عبدالعزيز حسن المطري للاستشارات الهندسية</div><div class="sub">A. H. AL-MATARI FOR ENGINEERING CONSULT — ترخيص ٥١٠٠٠٠٠٧٨٢</div><div class="motto">المستشار مؤتمن</div></header>
+<div class="doc"><span class="type">مبنى — إشراف هندسي</span><h1>عمارلاة دورين</h1><div class="row"><small>العميل:</small> محمد حمد ابراهيم</div><div class="row"><small>الحي:</small> الروابي</div><div class="row"><small>الوصف:</small> مبني</div></div>
+<div class="viewer-wrap"><model-viewer src="parcel.glb" alt="عمارلاة دورين" ar ar-modes="scene-viewer webxr quick-look" ar-scale="auto" camera-controls auto-rotate rotation-per-second="8deg" camera-orbit="35deg 65deg 2m" shadow-intensity="1" exposure="1.1" ios-src="parcel.usdz"><button slot="ar-button">📐 اعرضه على أرض الواقع</button></model-viewer></div>
+
+<div class="legend"><div class="item"><span class="sw" style="background:#1a5276"></span><span><b>تجربية</b> <small>— </small></span></div></div>
+<footer><b>م. محمد حمد المنصور</b> — جازان، العارضة، طريق الأمير سلطان — هاتف ‎+966538986031‎<br>هذا النموذج لأغراض العرض، المخططات المعتمدة هي الوثائق الرسمية</footer>
+<script>
+const HASH='3220ded03f61d944380f9500f434f321962e9c9ae62785de14afebfa20a77a2b', KEY='ar-ok-prj-20260611-fodvo';
+const gate=document.getElementById('gate'), inp=document.getElementById('nid'), err=document.getElementById('err');
+const toLatin=s=>s.replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d));
+async function sha(t){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(t));return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join('')}
+if(sessionStorage.getItem(KEY)==='1')gate.remove();
+async function check(){const v=toLatin(inp.value).replace(/\D/g,'');if(!v){err.textContent='أدخل رقم الهوية';return}if(await sha(v)===HASH){sessionStorage.setItem(KEY,'1');gate.remove()}else{err.textContent='الرقم غير مطابق — تأكد وأعد المحاولة';inp.select()}}
+document.getElementById('go').onclick=check;
+inp.addEventListener('keydown',e=>{if(e.key==='Enter')check()});
+</script>
+</body>
+</html>
