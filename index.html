@@ -46,7 +46,8 @@ header .motto{font-size:.74rem;color:var(--gold);margin-top:5px}
   display:flex;flex-direction:column;box-shadow:0 2px 10px rgba(30,41,59,.06)
 }
 .card .top{padding:14px 16px 10px;border-bottom:1px dashed var(--line)}
-.card .badge{display:inline-block;background:var(--navy);color:#fff;font-size:.62rem;font-weight:700;padding:2px 9px;border-radius:99px;margin-bottom:6px}
+.card .badge{display:inline-block;background:var(--navy);color:#fff;font-size:.62rem;font-weight:700;padding:2px 9px;border-radius:99px;margin-bottom:6px;margin-inline-end:5px}
+.card .badge.lock{background:var(--red)}
 .card h3{font-size:.95rem;font-weight:900;color:var(--navy);line-height:1.45}
 .card .client{font-size:.76rem;color:#64748b;margin-top:3px}
 .card .slug{font-size:.66rem;color:#94a3b8;direction:ltr;text-align:right;margin-top:4px;font-family:monospace}
@@ -143,20 +144,22 @@ async function copyLink(url){
   catch(e){ prompt('انسخ الرابط:', url); }
 }
 
-function waShare(title,url){
-  const msg=`مكتب المطري للاستشارات الهندسية\n\nالمجسم التفاعلي للمشروع: ${title}\n\nافتح الرابط واضغط زر «اعرضه على أرض الواقع» لمعاينته بتقنية الواقع المعزز:\n${url}`;
+function waShare(title,url,locked){
+  const lockLine = locked ? '\n\nالصفحة خاصة بكم — تُفتح بإدخال رقم هويتكم.' : '';
+  const msg=`مكتب المطري للاستشارات الهندسية\n\nالمجسم التفاعلي للمشروع: ${title}${lockLine}\n\nافتح الرابط واضغط زر «اعرضه على أرض الواقع» لمعاينته بتقنية الواقع المعزز:\n${url}`;
   window.open('https://wa.me/?text='+encodeURIComponent(msg),'_blank');
 }
 
 function showQr(url){ qrBig.src=qrUrl(url,1200); qrDlg.showModal(); }
 
 function card(p){
-  const el=document.createElement('div'); el.className='card'; el.dataset.q=(p.title+' '+p.client+' '+p.slug).toLowerCase();
+  const el=document.createElement('div'); el.className='card'; el.dataset.q=(p.title+' '+p.client+' '+p.district+' '+p.slug).toLowerCase();
   el.innerHTML=`
     <div class="top">
-      ${p.type?`<span class="badge">${p.type}</span>`:''}
+      ${p.type?`<span class="badge">${p.type}</span>`:''}${p.locked?`<span class="badge lock">🔐 محمي بالهوية</span>`:''}
       <h3>${p.title}</h3>
       ${p.client?`<div class="client">${p.client}</div>`:''}
+      ${p.district?`<div class="client">${p.district}</div>`:''}
       <div class="slug">/${p.slug}/</div>
     </div>
     <div class="body">
@@ -170,18 +173,24 @@ function card(p){
     </div>`;
   el.querySelector('.qr').onclick=()=>showQr(p.url);
   el.querySelector('[data-act=copy]').onclick=()=>copyLink(p.url);
-  el.querySelector('[data-act=wa]').onclick=()=>waShare(p.title,p.url);
+  el.querySelector('[data-act=wa]').onclick=()=>waShare(p.title,p.url,p.locked);
   return el;
 }
 
 async function meta(slug){
-  // قراءة العنوان والعميل والنوع من صفحة المشروع نفسها (بدون حدود استهلاك)
-  const p={slug, url:BASE+slug+'/', title:slug, client:'', type:''};
+  // قراءة بيانات المشروع من صفحته (يدعم إصدارات الصفحات القديمة والجديدة)
+  const p={slug, url:BASE+slug+'/', title:slug, client:'', district:'', type:'', locked:false};
   try{
     const html=await (await fetch(p.url+'index.html',{cache:'no-store'})).text();
     const t=html.match(/<h1>(.*?)<\/h1>/); if(t) p.title=t[1];
-    const c=html.match(/class="client">العميل:\s*(.*?)<\/div>/); if(c) p.client='العميل: '+c[1];
     const b=html.match(/class="type">(.*?)<\/span>/); if(b) p.type=b[1];
+    p.locked=html.includes('id="gate"');
+    // صفحات v6: <small>العميل:</small> الاسم
+    let c=html.match(/<small>العميل:<\/small>\s*(.*?)<\/div>/);
+    // صفحات أقدم: class="client">العميل: الاسم
+    if(!c) c=html.match(/class="client">العميل:\s*(.*?)<\/div>/);
+    if(c) p.client='العميل: '+c[1];
+    const d=html.match(/<small>الحي:<\/small>\s*(.*?)<\/div>/); if(d) p.district='الحي: '+d[1];
   }catch(e){}
   return p;
 }
